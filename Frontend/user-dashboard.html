@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Disaster Relief System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Disaster Relief System</div>
+            <ul class="nav-menu">
+                <li><a href="user-dashboard.html">Dashboard</a></li>
+                <li><a href="#disasters">Disasters</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+            <button class="btn-primary" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Welcome, User</h2>
+                <button class="btn-secondary" onclick="requestHelp()">Request Help</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>5</h3>
+                    <p>Active Disasters</p>
+                </div>
+                <div class="stat-card">
+                    <h3>12</h3>
+                    <p>Relief Camps</p>
+                </div>
+                <div class="stat-card">
+                    <h3>234</h3>
+                    <p>Active Volunteers</p>
+                </div>
+                <div class="stat-card">
+                    <h3>45</h3>
+                    <p>Resources Available</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Recent Disasters</h3>
+                <div class="table-container">
+                    <table id="disastersTable">
+                        <thead>
+                            <tr>
+                                <th>Disaster Name</th>
+                                <th>Location</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Flood - Maharashtra</td>
+                                <td>Mumbai, Maharashtra</td>
+                                <td>2025-09-15</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Earthquake - Gujarat</td>
+                                <td>Ahmedabad, Gujarat</td>
+                                <td>2025-09-10</td>
+                                <td><span class="badge badge-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>Cyclone - Odisha</td>
+                                <td>Bhubaneswar, Odisha</td>
+                                <td>2025-09-05</td>
+                                <td><span class="badge badge-completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Landslide - Uttarakhand</td>
+                                <td>Dehradun, Uttarakhand</td>
+                                <td>2025-09-01</td>
+                                <td><span class="badge badge-completed">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Available Resources</h3>
+                <div class="table-container">
+                    <table id="resourcesTable">
+                        <thead>
+                            <tr>
+                                <th>Resource Name</th>
+                                <th>Type</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Food Packets</td>
+                                <td>Food & Water</td>
+                                <td>Camp A - Mumbai</td>
+                                <td><span class="badge badge-active">Available</span></td>
+                            </tr>
+                            <tr>
+                                <td>Medical Supplies</td>
+                                <td>Healthcare</td>
+                                <td>Camp B - Ahmedabad</td>
+                                <td><span class="badge badge-active">Available</span></td>
+                            </tr>
+                            <tr>
+                                <td>Tents & Shelter</td>
+                                <td>Shelter</td>
+                                <td>Camp C - Bhubaneswar</td>
+                                <td><span class="badge badge-pending">Low Stock</span></td>
+                            </tr>
+                            <tr>
+                                <td>Blankets & Clothing</td>
+                                <td>Essentials</td>
+                                <td>Camp D - Dehradun</td>
+                                <td><span class="badge badge-active">Available</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Nearby Relief Camps</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Camp Name</th>
+                                <th>Location</th>
+                                <th>Capacity</th>
+                                <th>Contact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Relief Camp Alpha</td>
+                                <td>Mumbai Central</td>
+                                <td>500/800</td>
+                                <td>+91-22-1234-5678</td>
+                            </tr>
+                            <tr>
+                                <td>Relief Camp Beta</td>
+                                <td>Ahmedabad North</td>
+                                <td>300/500</td>
+                                <td>+91-79-2345-6789</td>
+                            </tr>
+                            <tr>
+                                <td>Relief Camp Gamma</td>
+                                <td>Bhubaneswar East</td>
+                                <td>200/400</td>
+                                <td>+91-674-3456-7890</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Disaster Relief Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
