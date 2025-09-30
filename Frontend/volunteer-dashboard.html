@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Dashboard - Disaster Relief System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Disaster Relief System</div>
+            <ul class="nav-menu">
+                <li><a href="volunteer-dashboard.html">Dashboard</a></li>
+                <li><a href="#assignments">Assignments</a></li>
+                <li><a href="#training">Training</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+            <button class="btn-primary" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Welcome, Volunteer</h2>
+                <button class="btn-secondary" onclick="alert('Profile settings')">Edit Profile</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>8</h3>
+                    <p>Missions Completed</p>
+                </div>
+                <div class="stat-card">
+                    <h3>3</h3>
+                    <p>Active Assignments</p>
+                </div>
+                <div class="stat-card">
+                    <h3>120</h3>
+                    <p>Hours Contributed</p>
+                </div>
+                <div class="stat-card">
+                    <h3>45</h3>
+                    <p>People Helped</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Current Assignments</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Assignment</th>
+                                <th>Location</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Food Distribution</td>
+                                <td>Relief Camp A, Mumbai</td>
+                                <td>2025-09-29</td>
+                                <td>10:00 AM - 2:00 PM</td>
+                                <td><span class="badge badge-active">In Progress</span></td>
+                            </tr>
+                            <tr>
+                                <td>Medical Assistance</td>
+                                <td>Relief Camp B, Ahmedabad</td>
+                                <td>2025-09-30</td>
+                                <td>9:00 AM - 1:00 PM</td>
+                                <td><span class="badge badge-pending">Scheduled</span></td>
+                            </tr>
+                            <tr>
+                                <td>Shelter Setup</td>
+                                <td>Relief Camp C, Bhubaneswar</td>
+                                <td>2025-10-01</td>
+                                <td>8:00 AM - 12:00 PM</td>
+                                <td><span class="badge badge-pending">Scheduled</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Available Operations</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operation</th>
+                                <th>Camp Location</th>
+                                <th>Date</th>
+                                <th>Required Skills</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Emergency Response</td>
+                                <td>Camp A - Mumbai</td>
+                                <td>2025-10-02</td>
+                                <td>First Aid, Communication</td>
+                                <td><button class="btn-primary" onclick="applyForOperation('Emergency Response')">Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>Logistics Support</td>
+                                <td>Camp B - Ahmedabad</td>
+                                <td>2025-10-03</td>
+                                <td>Organization, Transport</td>
+                                <td><button class="btn-primary" onclick="applyForOperation('Logistics Support')">Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>Community Outreach</td>
+                                <td>Camp C - Pune</td>
+                                <td>2025-10-04</td>
+                                <td>Communication, Social Work</td>
+                                <td><button class="btn-primary" onclick="applyForOperation('Community Outreach')">Apply</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Training & Certifications</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Training Program</th>
+                                <th>Status</th>
+                                <th>Completion Date</th>
+                                <th>Certificate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First Aid & CPR</td>
+                                <td><span class="badge badge-completed">Completed</span></td>
+                                <td>2025-08-15</td>
+                                <td><a href="#" style="color: #0c7075;">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Disaster Response Training</td>
+                                <td><span class="badge badge-completed">Completed</span></td>
+                                <td>2025-07-20</td>
+                                <td><a href="#" style="color: #0c7075;">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Emergency Communication</td>
+                                <td><span class="badge badge-active">In Progress</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Recent Activity</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Location</th>
+                                <th>Date</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Food Distribution</td>
+                                <td>Camp A - Mumbai</td>
+                                <td>2025-09-25</td>
+                                <td>4 hours</td>
+                            </tr>
+                            <tr>
+                                <td>Medical Camp Setup</td>
+                                <td>Camp B - Ahmedabad</td>
+                                <td>2025-09-20</td>
+                                <td>6 hours</td>
+                            </tr>
+                            <tr>
+                                <td>Rescue Operations Support</td>
+                                <td>Camp C - Bhubaneswar</td>
+                                <td>2025-09-15</td>
+                                <td>8 hours</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Disaster Relief Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

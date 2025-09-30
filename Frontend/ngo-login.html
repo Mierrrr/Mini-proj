@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Login - Disaster Relief System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Disaster Relief System</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="role-section.html" class="btn-primary">Back</a>
+        </div>
+    </nav>
+
+    <section class="login-section">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>NGO Login</h2>
+                <p>Login to manage your organization</p>
+            </div>
+            <form onsubmit="event.preventDefault(); login('ngo');">
+                <div class="form-group">
+                    <label for="username">Organization Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter organization username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                <div class="form-group">
+                    <label for="org-type">Organization Type</label>
+                    <select id="org-type" name="org-type" required>
+                        <option value="">Select organization type</option>
+                        <option value="relief">Relief Organization</option>
+                        <option value="medical">Medical Services</option>
+                        <option value="logistics">Logistics & Supply</option>
+                        <option value="rescue">Rescue Operations</option>
+                        <option value="rehabilitation">Rehabilitation Services</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <div class="form-footer">
+                Register your organization? <a href="#">Register here</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Disaster Relief Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

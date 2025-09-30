@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - Disaster Relief System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">Disaster Relief System - Admin</div>
+        <ul class="nav-menu">
+            <li><a href="#">Dashboard</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="admin-section">
+    <div class="container">
+        <h2>Manage Records</h2>
+        <div class="button-group">
+            <button onclick="addRecord('users')">Add User</button>
+            <button onclick="addRecord('volunteers')">Add Volunteer</button>
+            <button onclick="addRecord('ngos')">Add NGO</button>
+        </div>
+
+        <div class="view-section">
+            <select id="recipientType">
+                <option value="">Select type to view</option>
+                <option value="users">Users</option>
+                <option value="volunteers">Volunteers</option>
+                <option value="ngos">NGOs</option>
+            </select>
+            <button id="viewButton">View Data</button>
+        </div>
+
+        <table id="adminTable">
+            <tr><td style="text-align:center;">Select a type to view data</td></tr>
+        </table>
+
+        <h2>Send Notification</h2>
+        <div class="notification-section">
+            <select id="recipientType">
+                <option value="">Select recipient</option>
+                <option value="users">Users</option>
+                <option value="volunteers">Volunteers</option>
+                <option value="ngos">NGOs</option>
+            </select>
+            <input type="text" id="notificationMessage" placeholder="Enter message">
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+</section>
+
+<script src="admin.js"></script>
+</body>
+</html>

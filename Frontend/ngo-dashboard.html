@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Dashboard - Disaster Relief System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Disaster Relief System</div>
+            <ul class="nav-menu">
+                <li><a href="ngo-dashboard.html">Dashboard</a></li>
+                <li><a href="#camps">Relief Camps</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#reports">Reports</a></li>
+            </ul>
+            <button class="btn-primary" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Welcome, NGO Organization</h2>
+                <button class="btn-secondary" onclick="addCamp()">Add New Camp</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>7</h3>
+                    <p>Active Relief Camps</p>
+                </div>
+                <div class="stat-card">
+                    <h3>156</h3>
+                    <p>Active Volunteers</p>
+                </div>
+                <div class="stat-card">
+                    <h3>1,234</h3>
+                    <p>People Helped</p>
+                </div>
+                <div class="stat-card">
+                    <h3>89</h3>
+                    <p>Active Operations</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Relief Camps Management</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Camp Name</th>
+                                <th>Location</th>
+                                <th>Disaster Type</th>
+                                <th>Capacity</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Relief Camp Alpha</td>
+                                <td>Mumbai Central</td>
+                                <td>Flood</td>
+                                <td>500/800</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                                <td><button class="btn-primary" style="padding: 0.5rem 1rem;">Manage</button></td>
+                            </tr>
+                            <tr>
+                                <td>Relief Camp Beta</td>
+                                <td>Ahmedabad North</td>
+                                <td>Earthquake</td>
+                                <td>300/500</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                                <td><button class="btn-primary" style="padding: 0.5rem 1rem;">Manage</button></td>
+                            </tr>
+                            <tr>
+                                <td>Relief Camp Gamma</td>
+                                <td>Bhubaneswar East</td>
+                                <td>Cyclone</td>
+                                <td>200/400</td>
+                                <td><span class="badge badge-completed">Closed</span></td>
+                                <td><button class="btn-secondary" style="padding: 0.5rem 1rem;">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>Relief Camp Delta</td>
+                                <td>Pune West</td>
+                                <td>Flood</td>
+                                <td>400/600</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                                <td><button class="btn-primary" style="padding: 0.5rem 1rem;">Manage</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Resource Allocation</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Resource Type</th>
+                                <th>Camp Location</th>
+                                <th>Quantity</th>
+                                <th>Last Updated</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Food & Water</td>
+                                <td>Camp Alpha - Mumbai</td>
+                                <td>5000 units</td>
+                                <td>2025-09-29</td>
+                                <td><span class="badge badge-active">Sufficient</span></td>
+                            </tr>
+                            <tr>
+                                <td>Medical Supplies</td>
+                                <td>Camp Beta - Ahmedabad</td>
+                                <td>800 units</td>
+                                <td>2025-09-28</td>
+                                <td><span class="badge badge-pending">Low Stock</span></td>
+                            </tr>
+                            <tr>
+                                <td>Shelter Materials</td>
+                                <td>Camp Alpha - Mumbai</td>
+                                <td>300 units</td>
+                                <td>2025-09-29</td>
+                                <td><span class="badge badge-active">Sufficient</span></td>
+                            </tr>
+                            <tr>
+                                <td>Clothing & Blankets</td>
+                                <td>Camp Delta - Pune</td>
+                                <td>1200 units</td>
+                                <td>2025-09-29</td>
+                                <td><span class="badge badge-active">Sufficient</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Volunteer Management</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Volunteer Name</th>
+                                <th>Assigned Camp</th>
+                                <th>Role</th>
+                                <th>Availability</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rajesh Kumar</td>
+                                <td>Camp Alpha - Mumbai</td>
+                                <td>Medical Support</td>
+                                <td>Full Time</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Priya Sharma</td>
+                                <td>Camp Beta - Ahmedabad</td>
+                                <td>Food Distribution</td>
+                                <td>Part Time</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Amit Patel</td>
+                                <td>Camp Delta - Pune</td>
+                                <td>Logistics</td>
+                                <td>Weekends</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sneha Reddy</td>
+                                <td>Camp Alpha - Mumbai</td>
+                                <td>Communication</td>
+                                <td>Full Time</td>
+                                <td><span class="badge badge-active">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Active Operations</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operation Name</th>
+                                <th>Location</th>
+                                <th>Start Date</th>
+                                <th>Volunteers Assigned</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Emergency Food Distribution</td>
+                                <td>Mumbai Central</td>
+                                <td>2025-09-29</td>
+                                <td>15</td>
+                                <td><span class="badge badge-active">In Progress</span></td>
+                            </tr>
+                            <tr>
+                                <td>Medical Camp Setup</td>
+                                <td>Ahmedabad North</td>
+                                <td>2025-09-30</td>
+                                <td>8</td>
+                                <td><span class="badge badge-pending">Scheduled</span></td>
+                            </tr>
+                            <tr>
+                                <td>Shelter Construction</td>
+                                <td>Pune West</td>
+                                <td>2025-10-01</td>
+                                <td>20</td>
+                                <td><span class="badge badge-pending">Scheduled</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Resource Requests</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Resource Type</th>
+                                <th>Quantity</th>
+                                <th>Requesting Camp</th>
+                                <th>Priority</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#REQ001</td>
+                                <td>Medical Supplies</td>
+                                <td>500 units</td>
+                                <td>Camp Beta - Ahmedabad</td>
+                                <td><span class="badge badge-pending">High</span></td>
+                                <td><button class="btn-primary" style="padding: 0.5rem 1rem;">Approve</button></td>
+                            </tr>
+                            <tr>
+                                <td>#REQ002</td>
+                                <td>Food Packets</td>
+                                <td>1000 units</td>
+                                <td>Camp Alpha - Mumbai</td>
+                                <td><span class="badge badge-active">Medium</span></td>
+                                <td><button class="btn-primary" style="padding: 0.5rem 1rem;">Approve</button></td>
+                            </tr>
+                            <tr>
+                                <td>#REQ003</td>
+                                <td>Blankets</td>
+                                <td>200 units</td>
+                                <td>Camp Delta - Pune</td>
+                                <td><span class="badge badge-active">Medium</span></td>
+                                <td><button class="btn-primary" style="padding: 0.5rem 1rem;">Approve</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Disaster Relief Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
