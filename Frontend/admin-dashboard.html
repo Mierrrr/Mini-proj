@@ -1,58 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard - Disaster Relief System</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Disaster Relief System</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar">
+  <!-- Navbar -->
+  <nav class="navbar">
     <div class="nav-container">
-        <div class="logo">Disaster Relief System - Admin</div>
-        <ul class="nav-menu">
-            <li><a href="#">Dashboard</a></li>
-        </ul>
+      <div class="logo">Disaster Relief - Admin</div>
+      <ul class="nav-menu">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#" onclick="adminLogout()">Logout</a></li>
+      </ul>
     </div>
-</nav>
+  </nav>
 
-<section class="admin-section">
+  <!-- Stats -->
+  <section class="stats-section">
+    <div class="stat-card">Users: <span id="totalUsers">0</span></div>
+    <div class="stat-card">Volunteers: <span id="totalVolunteers">0</span></div>
+    <div class="stat-card">NGOs: <span id="totalNGOs">0</span></div>
+    <div class="stat-card">Active Camps: <span id="totalCamps">0</span></div>
+  </section>
+
+  <!-- Tables -->
+  <section class="admin-section">
     <div class="container">
-        <h2>Manage Records</h2>
-        <div class="button-group">
-            <button onclick="addRecord('users')">Add User</button>
-            <button onclick="addRecord('volunteers')">Add Volunteer</button>
-            <button onclick="addRecord('ngos')">Add NGO</button>
-        </div>
+      <div class="section-header"><h3>Users</h3></div>
+      <button class="btn-primary" onclick="showAddModal('user')">Add User</button>
+      <table id="usersTable" class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Username</th><th>Email</th><th>Location</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
 
-        <div class="view-section">
-            <select id="recipientType">
-                <option value="">Select type to view</option>
-                <option value="users">Users</option>
-                <option value="volunteers">Volunteers</option>
-                <option value="ngos">NGOs</option>
-            </select>
-            <button id="viewButton">View Data</button>
-        </div>
+      <div class="section-header"><h3>Volunteers</h3></div>
+      <button class="btn-primary" onclick="showAddModal('volunteer')">Add Volunteer</button>
+      <table id="volunteersTable" class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Email</th><th>Availability</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
 
-        <table id="adminTable">
-            <tr><td style="text-align:center;">Select a type to view data</td></tr>
-        </table>
+      <div class="section-header"><h3>NGOs</h3></div>
+      <button class="btn-primary" onclick="showAddModal('ngo')">Add NGO</button>
+      <table id="ngosTable" class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Type</th><th>Contact</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
 
-        <h2>Send Notification</h2>
-        <div class="notification-section">
-            <select id="recipientType">
-                <option value="">Select recipient</option>
-                <option value="users">Users</option>
-                <option value="volunteers">Volunteers</option>
-                <option value="ngos">NGOs</option>
-            </select>
-            <input type="text" id="notificationMessage" placeholder="Enter message">
-            <button id="sendButton">Send</button>
-        </div>
+      <div class="section-header"><h3>Disasters</h3></div>
+      <button class="btn-primary" onclick="showAddModal('disaster')">Add Disaster</button>
+      <table id="disastersTable" class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Location</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="section-header"><h3>Camps</h3></div>
+      <button class="btn-primary" onclick="showAddModal('camp')">Add Camp</button>
+      <table id="campsTable" class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Location</th><th>Capacity</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="section-header"><h3>Resources</h3></div>
+      <button class="btn-primary" onclick="showAddModal('resource')">Add Resource</button>
+      <table id="resourcesTable" class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Type</th><th>Quantity</th><th>Location</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
-</section>
+  </section>
 
-<script src="admin.js"></script>
+  <!-- Success Message -->
+  <div id="notificationSuccess" class="success-msg"></div>
+
+  <!-- Modal -->
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <form id="modalForm"></form>
+    </div>
+  </div>
+  
+  
+  
+
+  <script src="script.js"></script>
 </body>
 </html>
