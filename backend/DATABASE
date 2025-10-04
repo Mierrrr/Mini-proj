@@ -1,0 +1,108 @@
+CREATE DATABASE disaster_relief;
+USE disaster_relief;
+
+-- Users (affected people)
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    location VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Volunteers
+CREATE TABLE volunteers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    availability ENUM('full-time', 'part-time', 'weekends', 'on-call') NOT NULL,
+    location VARCHAR(100),
+    missions_completed INT DEFAULT 0,
+    hours_contributed INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- NGOs
+CREATE TABLE ngos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    org_username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    org_type ENUM('relief','medical','logistics','rescue','rehabilitation') NOT NULL,
+    contact VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Admins
+CREATE TABLE admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    security_code VARCHAR(10) NOT NULL
+);
+
+-- Disasters
+CREATE TABLE disasters (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    location VARCHAR(100),
+    date DATE,
+    status ENUM('Active','Pending','Completed') DEFAULT 'Pending'
+);
+
+-- Relief Camps
+CREATE TABLE relief_camps (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    camp_name VARCHAR(100),
+    location VARCHAR(100),
+    disaster_id INT,
+    capacity VARCHAR(20), -- e.g., "500/800"
+    status ENUM('Active','Closed') DEFAULT 'Active',
+    ngo_id INT,
+    FOREIGN KEY (disaster_id) REFERENCES disasters(id),
+    FOREIGN KEY (ngo_id) REFERENCES ngos(id)
+);
+
+-- Resources
+CREATE TABLE resources (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    type VARCHAR(50),
+    quantity VARCHAR(50),
+    location VARCHAR(100),
+    status ENUM('Available','Low Stock','Out of Stock') DEFAULT 'Available',
+    camp_id INT,
+    FOREIGN KEY (camp_id) REFERENCES relief_camps(id)
+);
+
+-- Assignments (for volunteers)
+CREATE TABLE assignments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    volunteer_id INT,
+    assignment_name VARCHAR(100),
+    location VARCHAR(100),
+    date DATE,
+    time_slot VARCHAR(50),
+    status ENUM('In Progress','Scheduled','Completed') DEFAULT 'Scheduled',
+    FOREIGN KEY (volunteer_id) REFERENCES volunteers(id)
+);
+
+-- Operations (available for volunteers to apply)
+CREATE TABLE operations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    camp_location VARCHAR(100),
+    date DATE,
+    required_skills VARCHAR(200)
+);
+
+-- Resource Requests (from camps to NGO/admin)
+CREATE TABLE resource_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    request_id VARCHAR(20) UNIQUE,
+    resource_type VARCHAR(100),
+    quantity VARCHAR(50),
+    camp_location VARCHAR(100),
+    priority ENUM('High','Medium','Low') DEFAULT 'Medium',
+    status ENUM('Pending','Approved','Rejected') DEFAULT 'Pending'
+);
