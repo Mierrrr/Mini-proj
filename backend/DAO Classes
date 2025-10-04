@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class DisasterReliefJDBC {
 
     // Database credentials
-    private static final String DB_URL = "MySQL80";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/MySQL80";
     private static final String USERNAME = "root"; // Change if needed
     private static final String PASSWORD = "Mihir@123"; // Change to your MySQL password
 
