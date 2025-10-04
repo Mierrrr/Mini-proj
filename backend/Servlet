@@ -1,0 +1,212 @@
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
+@WebServlet("/disaster-relief")
+public class DisasterReliefServlet extends HttpServlet {
+
+    private DisasterReliefDAO dao;
+
+    @Override
+    public void init() throws ServletException {
+        // Initialize DAO with your DB credentials
+        String dbUrl = "jdbc:mysql://localhost:3306/disaster_relief?useSSL=false&serverTimezone=UTC";
+        String username = "root";
+        String password = "your_password"; // 🔐 Change this!
+        dao = new DisasterReliefDAO(dbUrl, username, password);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        try {
+            List<DisasterReliefDAO.User> users = dao.fetchAllUsers();
+            out.println("<html><body>");
+            out.println("<h2>All Users</h2><ul>");
+            for (DisasterReliefDAO.User user : users) {
+                out.println("<li>" + user.toString() + "</li>");
+            }
+            out.println("</ul></body></html>");
+        } catch (SQLException e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.println("<h3>Database Error: " + e.getMessage() + "</h3>");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/plain;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        String action = request.getParameter("action");
+        if (action == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            out.println("❌ Missing 'action' parameter.");
+            return;
+        }
+
+        try {
+            switch (action.toLowerCase()) {
+                case "insert_user":
+                    insertUser(request, out);
+                    break;
+                case "insert_disaster":
+                    insertDisaster(request, out);
+                    break;
+                case "insert_volunteer":
+                    insertVolunteer(request, out);
+                    break;
+                case "insert_ngo":
+                    insertNGO(request, out);
+                    break;
+                case "insert_relief_camp":
+                    insertReliefCamp(request, out);
+                    break;
+                case "insert_resource":
+                    insertResource(request, out);
+                    break;
+                case "insert_assignment":
+                    insertAssignment(request, out);
+                    break;
+                case "insert_operation":
+                    insertOperation(request, out);
+                    break;
+                case "insert_resource_request":
+                    insertResourceRequest(request, out);
+                    break;
+                default:
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    out.println("❌ Unknown action: " + action);
+            }
+        } catch (SQLException | DateTimeParseException e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.println("❌ Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void insertUser(HttpServletRequest req, PrintWriter out) throws SQLException {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+        String location = req.getParameter("location");
+        validateParams(out, username, password, email, location);
+        dao.insertUser(username, password, email, location);
+        out.println("✅ User inserted successfully.");
+    }
+
+    private void insertDisaster(HttpServletRequest req, PrintWriter out) throws SQLException, DateTimeParseException {
+        String name = req.getParameter("name");
+        String location = req.getParameter("location");
+        String dateStr = req.getParameter("date"); // yyyy-MM-dd
+        validateParams(out, name, location, dateStr);
+        LocalDate date = LocalDate.parse(dateStr);
+        dao.insertDisaster(name, location, date);
+        out.println("✅ Disaster inserted successfully.");
+    }
+
+    private void insertVolunteer(HttpServletRequest req, PrintWriter out) throws SQLException {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String availability = req.getParameter("availability");
+        String location = req.getParameter("location");
+        validateParams(out, username, password, availability, location);
+        dao.insertVolunteer(username, password, availability, location);
+        out.println("✅ Volunteer inserted successfully.");
+    }
+
+    private void insertNGO(HttpServletRequest req, PrintWriter out) throws SQLException {
+        String orgUsername = req.getParameter("org_username");
+        String password = req.getParameter("password");
+        String orgType = req.getParameter("org_type");
+        String contact = req.getParameter("contact");
+        validateParams(out, orgUsername, password, orgType, contact);
+        dao.insertNGO(orgUsername, password, orgType, contact);
+        out.println("✅ NGO inserted successfully.");
+    }
+
+    private void insertReliefCamp(HttpServletRequest req, PrintWriter out) throws SQLException {
+        String campName = req.getParameter("camp_name");
+        String location = req.getParameter("location");
+        String disasterIdStr = req.getParameter("disaster_id");
+        String capacity = req.getParameter("capacity");
+        String ngoIdStr = req.getParameter("ngo_id");
+        validateParams(out, campName, location, disasterIdStr, capacity, ngoIdStr);
+        int disasterId = Integer.parseInt(disasterIdStr);
+        int ngoId = Integer.parseInt(ngoIdStr);
+        dao.insertReliefCamp(campName, location, disasterId, capacity, ngoId);
+        out.println("✅ Relief camp inserted successfully.");
+    }
+
+    private void insertResource(HttpServletRequest req, PrintWriter out) throws SQLException {
+        String name = req.getParameter("name");
+        String type = req.getParameter("type");
+        String quantity = req.getParameter("quantity");
+        String location = req.getParameter("location");
+        String status = req.getParameter("status");
+        String campIdStr = req.getParameter("camp_id");
+        validateParams(out, name, type, quantity, location, status, campIdStr);
+        int campId = Integer.parseInt(campIdStr);
+        dao.insertResource(name, type, quantity, location, status, campId);
+        out.println("✅ Resource inserted successfully.");
+    }
+
+    private void insertAssignment(HttpServletRequest req, PrintWriter out) throws SQLException, DateTimeParseException {
+        String volunteerIdStr = req.getParameter("volunteer_id");
+        String assignmentName = req.getParameter("assignment_name");
+        String location = req.getParameter("location");
+        String dateStr = req.getParameter("date");
+        String timeSlot = req.getParameter("time_slot");
+        validateParams(out, volunteerIdStr, assignmentName, location, dateStr, timeSlot);
+        int volunteerId = Integer.parseInt(volunteerIdStr);
+        LocalDate date = LocalDate.parse(dateStr);
+        dao.insertAssignment(volunteerId, assignmentName, location, date, timeSlot);
+        out.println("✅ Assignment inserted successfully.");
+    }
+
+    private void insertOperation(HttpServletRequest req, PrintWriter out) throws SQLException, DateTimeParseException {
+        String name = req.getParameter("name");
+        String campLocation = req.getParameter("camp_location");
+        String dateStr = req.getParameter("date");
+        String requiredSkills = req.getParameter("required_skills");
+        validateParams(out, name, campLocation, dateStr, requiredSkills);
+        LocalDate date = LocalDate.parse(dateStr);
+        dao.insertOperation(name, campLocation, date, requiredSkills);
+        out.println("✅ Operation inserted successfully.");
+    }
+
+    private void insertResourceRequest(HttpServletRequest req, PrintWriter out) throws SQLException {
+        String requestId = req.getParameter("request_id");
+        String resourceType = req.getParameter("resource_type");
+        String quantity = req.getParameter("quantity");
+        String campLocation = req.getParameter("camp_location");
+        String priority = req.getParameter("priority");
+        validateParams(out, requestId, resourceType, quantity, campLocation, priority);
+        dao.insertResourceRequest(requestId, resourceType, quantity, campLocation, priority);
+        out.println("✅ Resource request inserted successfully.");
+    }
+
+    private void validateParams(PrintWriter out, String... params) {
+        for (String param : params) {
+            if (param == null || param.trim().isEmpty()) {
+                throw new IllegalArgumentException("Missing or empty parameter");
+            }
+        }
+    }
+}
+
+
+// Bhai isko na Tomcat server use kar ya koi bhi free server 
