@@ -18,9 +18,9 @@ public class DisasterReliefServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         // Initialize DAO with your DB credentials
-        String dbUrl = "jdbc:mysql://localhost:3306/disaster_relief?useSSL=false&serverTimezone=UTC";
+        String dbUrl = "MySQL80";
         String username = "root";
-        String password = "your_password"; // 🔐 Change this!
+        String password = "Mihir@123"; // 🔐 Change this!
         dao = new DisasterReliefDAO(dbUrl, username, password);
     }
 
