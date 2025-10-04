@@ -1,0 +1,172 @@
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class DisasterReliefJDBC {
+
+    // Database credentials
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/disaster_relief?useSSL=false&serverTimezone=UTC";
+    private static final String USERNAME = "root"; // Change if needed
+    private static final String PASSWORD = "0309"; // Change to your MySQL password
+
+    private static Connection connection;
+
+    public static void main(String[] args) {
+        try {
+            // Establish connection
+            connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            System.out.println("✅ Connected to disaster_relief database!");
+
+            // Example: Insert a user
+            insertUser("john_doe", "securePass123", "john@example.com", "Mumbai");
+
+            // Example: Insert a disaster
+            insertDisaster("Earthquake", "Nepal", LocalDate.of(2023, 10, 5));
+
+            // Example: Fetch all users
+            fetchAllUsers();
+
+            // Close connection
+            connection.close();
+            System.out.println("🔌 Connection closed.");
+
+        } catch (SQLException e) {
+            System.err.println("❌ Database error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // ==================== USERS ====================
+    public static void insertUser(String username, String password, String email, String location) throws SQLException {
+        String sql = "INSERT INTO users (username, password, email, location) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.setString(2, password); // In real app, hash this!
+            stmt.setString(3, email);
+            stmt.setString(4, location);
+            stmt.executeUpdate();
+            System.out.println("✅ User inserted: " + username);
+        }
+    }
+
+    public static void fetchAllUsers() throws SQLException {
+        String sql = "SELECT id, username, email, location FROM users";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            System.out.println("\n--- All Users ---");
+            while (rs.next()) {
+                System.out.printf("ID: %d | Username: %s | Email: %s | Location: %s%n",
+                        rs.getInt("id"), rs.getString("username"),
+                        rs.getString("email"), rs.getString("location"));
+            }
+        }
+    }
+
+    // ==================== DISASTERS ====================
+    public static void insertDisaster(String name, String location, LocalDate date) throws SQLException {
+        String sql = "INSERT INTO disasters (name, location, date) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.setString(2, location);
+            stmt.setDate(3, Date.valueOf(date));
+            stmt.executeUpdate();
+            System.out.println("✅ Disaster inserted: " + name);
+        }
+    }
+
+    // ==================== VOLUNTEERS ====================
+    public static void insertVolunteer(String username, String password, String availability, String location) throws SQLException {
+        String sql = "INSERT INTO volunteers (username, password, availability, location) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.setString(3, availability);
+            stmt.setString(4, location);
+            stmt.executeUpdate();
+            System.out.println("✅ Volunteer inserted: " + username);
+        }
+    }
+
+    // ==================== NGOS ====================
+    public static void insertNGO(String orgUsername, String password, String orgType, String contact) throws SQLException {
+        String sql = "INSERT INTO ngos (org_username, password, org_type, contact) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, orgUsername);
+            stmt.setString(2, password);
+            stmt.setString(3, orgType);
+            stmt.setString(4, contact);
+            stmt.executeUpdate();
+            System.out.println("✅ NGO inserted: " + orgUsername);
+        }
+    }
+
+    // ==================== RELIEF CAMPS ====================
+    public static void insertReliefCamp(String campName, String location, int disasterId, String capacity, int ngoId) throws SQLException {
+        String sql = "INSERT INTO relief_camps (camp_name, location, disaster_id, capacity, ngo_id) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, campName);
+            stmt.setString(2, location);
+            stmt.setInt(3, disasterId);
+            stmt.setString(4, capacity);
+            stmt.setInt(5, ngoId);
+            stmt.executeUpdate();
+            System.out.println("✅ Relief camp inserted: " + campName);
+        }
+    }
+
+    // ==================== RESOURCES ====================
+    public static void insertResource(String name, String type, String quantity, String location, String status, int campId) throws SQLException {
+        String sql = "INSERT INTO resources (name, type, quantity, location, status, camp_id) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.setString(2, type);
+            stmt.setString(3, quantity);
+            stmt.setString(4, location);
+            stmt.setString(5, status);
+            stmt.setInt(6, campId);
+            stmt.executeUpdate();
+            System.out.println("✅ Resource inserted: " + name);
+        }
+    }
+
+    // ==================== ASSIGNMENTS ====================
+    public static void insertAssignment(int volunteerId, String assignmentName, String location, LocalDate date, String timeSlot) throws SQLException {
+        String sql = "INSERT INTO assignments (volunteer_id, assignment_name, location, date, time_slot) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, volunteerId);
+            stmt.setString(2, assignmentName);
+            stmt.setString(3, location);
+            stmt.setDate(4, Date.valueOf(date));
+            stmt.setString(5, timeSlot);
+            stmt.executeUpdate();
+            System.out.println("✅ Assignment inserted for volunteer ID: " + volunteerId);
+        }
+    }
+
+    // ==================== OPERATIONS ====================
+    public static void insertOperation(String name, String campLocation, LocalDate date, String requiredSkills) throws SQLException {
+        String sql = "INSERT INTO operations (name, camp_location, date, required_skills) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.setString(2, campLocation);
+            stmt.setDate(3, Date.valueOf(date));
+            stmt.setString(4, requiredSkills);
+            stmt.executeUpdate();
+            System.out.println("✅ Operation inserted: " + name);
+        }
+    }
+
+    // ==================== RESOURCE REQUESTS ====================
+    public static void insertResourceRequest(String requestId, String resourceType, String quantity, String campLocation, String priority) throws SQLException {
+        String sql = "INSERT INTO resource_requests (request_id, resource_type, quantity, camp_location, priority) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, requestId);
+            stmt.setString(2, resourceType);
+            stmt.setString(3, quantity);
+            stmt.setString(4, campLocation);
+            stmt.setString(5, priority);
+            stmt.executeUpdate();
+            System.out.println("✅ Resource request inserted: " + requestId);
+        }
+    }
+}
