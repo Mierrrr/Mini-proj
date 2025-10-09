@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Disaster Relief</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6da5c0 0%, #294d61 100%);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        h2 {
+            color: #05161a;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .menu {
+            list-style: none;
+            padding: 0;
+        }
+        .menu li {
+            margin: 15px 0;
+        }
+        .menu a {
+            display: block;
+            padding: 15px;
+            background: #0f969c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s;
+            font-size: 16px;
+        }
+        .menu a:hover {
+            background: #0c7075;
+        }
+        .logout {
+            background: #294d61 !important;
+        }
+        .logout:hover {
+            background: #072e33 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🌍 Disaster Relief Dashboard</h2>
+        <ul class="menu">
+            <li><a href="addRequest.html">➕ Add New Request</a></li>
+            <li><a href="viewRequests">📋 View All Requests</a></li>
+            <li><a href="logout" class="logout">🚪 Logout</a></li>
+        </ul>
+    </div>
+</body>
+</html>

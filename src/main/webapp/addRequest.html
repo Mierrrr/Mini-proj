@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Request - Disaster Relief</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f969c 0%, #6da5c0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px 0;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #072e33;
+            margin-bottom: 30px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #6da5c0;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #0f969c;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0c7075;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #294d61;
+        }
+        .link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .link a {
+            color: #0c7075;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link a:hover {
+            color: #0f969c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🆘 Add Disaster Relief Request</h2>
+        <form action="addRequest" method="post">
+            <input type="text" name="requester_name" placeholder="Requester Name" required>
+            <input type="text" name="type_of_disaster" placeholder="Type of Disaster (e.g., Flood, Earthquake)" required>
+            <input type="text" name="location" placeholder="Location" required>
+            <button type="submit">Submit Request</button>
+        </form>
+        <div class="link">
+            <p><a href="dashboard.html">← Back to Dashboard</a></p>
+        </div>
+    </div>
+</body>
+</html>

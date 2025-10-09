@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disaster Relief Management</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #072E33 0%, #0C7075 100%);
+    color: #333;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, #05161A 0%, #072E33 100%);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    color: #6DA5C0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #6DA5C0;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, rgba(5, 22, 26, 0.9), rgba(7, 46, 51, 0.9)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%2305161A" width="1200" height="600"/></svg>');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 2rem;
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 1s ease;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 1.2s ease;
+}
+
+.btn {
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: #0F969C;
+    color: white;
+    box-shadow: 0 4px 15px rgba(15, 150, 156, 0.3);
+}
+
+.btn-primary:hover {
+    background: #0C7075;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(12, 112, 117, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #05161A;
+    transform: translateY(-2px);
+}
+
+/* About Section */
+.about-section {
+    background: white;
+    padding: 80px 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #05161A;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(12, 112, 117, 0.2);
+    border-color: #0C7075;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.card h3 {
+    color: #072E33;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.card p {
+    color: #555;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.vision-box {
+    background: linear-gradient(135deg, #0C7075 0%, #294D61 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(12, 112, 117, 0.3);
+}
+
+.vision-box h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.vision-box p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Footer */
+footer {
+    background: #05161A;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+/* Form Styles */
+form input, form select {
+    margin: 10px 0;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus, form select:focus {
+    outline: none;
+    border-color: #0C7075;
+}
+
+/* Table Styles */
+table {
+    width: 90%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background: linear-gradient(135deg, #05161A 0%, #072E33 100%);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    nav {
+        gap: 1rem;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+<body>
+<header>
+<div class="header-content">
+<h1> Disaster Relief Management System</h1>
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="register.html">Register</a>
+<a href="login.html">Login</a>
+
+</nav>
+</div>
+</header>
+
+<section id="home" class="hero">
+<div class="hero-content">
+<h2>Welcome to Safety and Relief</h2>
+<p>Connecting communities, volunteers, and organizations for rapid disaster response and recovery.</p>
+<div class="cta-buttons">
+<a href="register.html" class="btn btn-primary">Get Started</a>
+<a href="#about" class="btn btn-secondary">Learn More</a>
+</div>
+</div>
+</section>
+
+<section id="about" class="about-section">
+<div class="container">
+<h2 class="section-title">About Our System</h2>
+<p class="section-subtitle">Empowering communities through technology-driven disaster management</p>
+
+<div class="cards-grid">
+<div class="card">
+<div class="card-icon">🎯</div>
+<h3>Our Mission</h3>
+<p>To minimize loss of life and property by ensuring rapid response and efficient resource allocation during disasters through real-time coordination.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🌐</div>
+<h3>Centralized Platform</h3>
+<p>Connects government agencies, volunteers, NGOs, and affected citizens in one unified system for seamless crisis communication and management.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">📊</div>
+<h3>Smart Technology</h3>
+<p>Integrates data analytics, geolocation services, and automated alerts to help authorities make informed decisions and act promptly.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🤝</div>
+<h3>Collaboration Hub</h3>
+<p>Facilitates coordination between multiple stakeholders, enabling efficient volunteer deployment and resource distribution across affected areas.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">💾</div>
+<h3>Resource Database</h3>
+<p>Maintains comprehensive records of relief centers, available supplies, and donation tracking to ensure transparency and accountability.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">⚡</div>
+<h3>Rapid Response</h3>
+<p>Real-time emergency reporting system ensures help reaches those in need swiftly, reducing response time during critical situations.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🏥</div>
+<h3>Relief Management</h3>
+<p>Streamlines disaster preparedness, response, and recovery operations with efficient tracking of medical supplies, food, and shelter.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🌟</div>
+<h3>Building Resilience</h3>
+<p>Through innovation and collaboration, we aim to create a resilient society capable of facing natural and man-made disasters with unity and strength.</p>
+</div>
+</div>
+
+<div class="vision-box">
+<h3>Our Vision</h3>
+<p>Together, we can create a safer and better-prepared world for future generations. By leveraging technology and fostering collaboration, we strive to build communities that are ready to face any challenge with confidence and solidarity.</p>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>&copy; 2024 Disaster Relief Management System. All rights reserved.</p>
+<p>Building safer communities through technology and collaboration.</p>
+</div>
+</footer>
+</body>
+</html>
